@@ -81,3 +81,13 @@ This command follows (`-f`) the logs in real-time, helping debug any issues.
 ## Conclusion
 This guide provides a clear breakdown of deploying a model with TGI using Docker. Understanding each argument ensures efficient deployment, optimized performance, and effective resource management.
 
+# Deploying with VLLM
+```
+docker run --runtime nvidia --gpus '"device=7"' \
+    -v ~/.cache/huggingface:/root/.cache/huggingface \
+     --env "HF_HUB_ENABLE_HF_TRANSFER=0" --env "HUGGING_FACE_HUB_TOKEN=<secret>" \
+    -p 1313:8000 \
+    --ipc=host \
+    vllm/vllm-openai:latest \
+    --model PNU-Infosec/xxx --revision checkpoint-XX
+```
